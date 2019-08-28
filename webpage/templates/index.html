@@ -1,0 +1,15 @@
+<!doctype html>
+<head>
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<title>hello</title>
+</head>
+{% extends "layout.html" %}
+{% block body %}
+<div class="app-title">
+  	<h1>Oh Hello</h1>
+	<img src="https://www.fanthatracks.com/wp-content/uploads/2018/08/obi-wan-grievous-hi-there_1.jpg" alt="hello" height="600" width="800">
+	<form action="{{ url_for('do_logout') }}">
+    		<input type="submit" value="Log Out" class="btn"/>
+	</form>
+</div>
+{% endblock %}
