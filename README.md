@@ -18,14 +18,14 @@ This project, roger-skyline-1 let you install a Virtual Machine, discover the ba
 - [WEB application part](#web)
 - [Deploy Part](#deploy)
 
+<a id="VM_install"></a>
 ## Debian Installation 
 
-<a id="VM_install"></a>
 Download [Debian Cd images](https://www.debian.org/CD/http-ftp/) and install OS on your VirtualBox.
 
+<a id="depedency"></a>
 ## Install Depedency
 
-<a id="depedency"></a>
 As root:
 ```console
 apt-get update -y && apt-get upgrade -y
@@ -33,9 +33,9 @@ apt-get update -y && apt-get upgrade -y
 apt-get install sudo vim ufw portsentry fail2ban mailutils -y
 ```
 
+<a id="sudo"></a>
 ## Configure SUDO
 
-<a id="sudo"></a>
 Just edit the /etc/sudoers file like this
 
 ```console
@@ -75,9 +75,9 @@ USER_NAME     ALL=(ALL:ALL) NOPASSWD:ALL
 #includedir /etc/sudoers.d
 ```
 
+<a id="static_IP"></a>
 ## Setup a static IP
 
-<a id="static_IP"></a>
 In virtualbox's setings you have to add new virtual network (Go to File -> Host Network Manager(cmd+w) -> Add new one).
 A network will named vboxnet0. Check DHCP server checkbox (disabled).
 
@@ -123,9 +123,9 @@ sudo service networking restart
 ip a
 ```
 
+<a id="ssh_config"></a>
 ## Configuring up an ssh connection
 
-<a id="ssh_config"></a>
 1.  Edit the line 13 in /etc/ssh/sshd_config which states 'Port 22'
 
 ```console
@@ -176,9 +176,9 @@ sudo service sshd restart
 USER_NAME@192.168.56.2 -p 50023
 ```
 
+<a id="ufw"></a>
 ## Setup Firewall with UFW
 
-<a id="ufw"></a>
 1. Make sure ufw is enable
  
  ```console
@@ -236,9 +236,9 @@ sudo ufw reload
 sudo service fail2ban restart
 ```
 
+<a id="scan_secure"></a>
 ## Protection against port scans
 
-<a id="scan_secure"></a>
 1. Config portsentry
 
 ```console
@@ -279,9 +279,8 @@ KILL_HOSTS_DENY="ALL: $TARGET$ : DENY
 sudo service portsentry restart
 ```
 
-## Save the changes in IPtables after reboot
-
 <a id="save_changes"></a>
+## Save the changes in IPtables after reboot
 
 1. Make settings dump and save in in /etc/iptables/ folder
 
@@ -307,9 +306,9 @@ exit 0
 sudo chmod+x /etc/network/if-pre-up.d/iptables
 ```
 
+<a id="stop_services"></a>
 ## Stop the services we don’t need 
 
-<a id="stop_services"></a>
 ```console
 sudo systemctl disable <services inutiles>
 ```
@@ -320,9 +319,9 @@ Check the list of all services status on your vm:
 sudo systemctl list-unit-files
 ```
 
+<a id="update_script"></a>
 ## Update Packages srcipt
 
-<a id="update_script"></a>
 1. Create the `update_and_log.sh` script
 
 ```console
@@ -345,9 +344,9 @@ sudo vim /etc/crontab
 @reboot		root	sh /home/USER_NAME/update_and_log.sh
 ```
 
+<a id="crontab_script"></a>
 ## Crontab Changes Monitor script
 
-<a id="crontab_script"></a>
 1. Create the `crontab_monitor_changes.sh` script
 
 ```console
@@ -374,9 +373,9 @@ sudo vim /etc/crontab
 0 0	* * *	root	sh /home/ste/crontab_monitor_changes.sh
 ```
 
+<a id="web"></a>
 ## WEB application part
 
-<a id="web"></a>
 1. Write web application on python Flask like one of this
 [Login web page with Flask](https://pythonspot.com/login-authentication-with-flask/)
 
@@ -389,9 +388,9 @@ sudo vim /etc/crontab
 4. Create a Self-Signed SSL Certificate for Nginx
 [Creating SSL for Nginx tutorial](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-debian-9) 
 
+<a id="deploy"></a>
 ## Deploy Part
 
-<a id="deploy"></a>
 Write a script for automatic deployment of new changes on your web application like this one
 
 ```bash
